@@ -1,0 +1,41 @@
+﻿@*
+    * Author: Ashley Johansson
+    * Date Created: 11/19/2019 05:29PM
+    * Date Updated: 12/05/2019 10:37PM
+    * A form that allows users to create a new
+    * player character.
+*@
+@model String
+@{
+    Layout = "_Navigation";
+    ViewData["Title"] = "Character";
+}
+
+<body>
+    <h2>@Model Welcome to the Player (Main) Character Creator Form! Here you can create a new player character</h2>
+    <h2>Just fill out any of the fields below to build your character.</h2>
+    <h3>Be sure to press save in order to keep your information.</h3>
+    <form asp-controller="Home" asp-action="post" method="post">
+        <label for="name">Name</label>
+        <input name="name" /><br />
+        <label for="species">Species</label>
+        <input name="species" /><br />
+        <label for="gender">Gender</label>
+        <input name="gender" /><br />
+        <label for="description">Description</label>
+        <input name="description" /><br />
+        <label for="ability1">First Ability</label>
+        <input name="ability1" /><br />
+        <label for="ability2">Second Ability</label>
+        <input name="ability2" /><br />
+        <label for="ability3">Third Ability</label>
+        <input name="ability3" /><br />
+        <label for="ability4">Fourth Ability</label>
+        <input name="ability4" /><br />
+        <label for="ability5">Fifth Ability</label>
+        <input name="ability5" /><br />
+        <input type="submit" value="Save" />
+    </form>
+    <a href="Home/Member"></a>
+    <p>Form coming soon.</p>
+</body>

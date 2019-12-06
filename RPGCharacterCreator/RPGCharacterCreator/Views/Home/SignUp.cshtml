@@ -1,0 +1,30 @@
+﻿@*
+    * Author: Ashley Johansson
+    * Date Created: 11/19/2019 05:22PM
+    * Date Updated: 12/05/2019 09:45PM
+    * A form that allows users to sign into their
+    * current accounts, or to create a new account.
+*@
+
+@{
+    Layout = "_Navigation";
+    ViewData["Title"] = "Sign Up";
+}
+
+<body>
+    <h2>If you are a returning user only enter your email or username and your password.</h2>
+    <h2>If you are a new user please fill out all fields with an asterisk.</h2>
+
+    <form asp-controller="Home" asp-action="post" method="post">
+        <label for="email">Email</label>
+        <input name="email" /><br />
+        <label for="userName">UserName</label>
+        <input name="userName"  /><br />
+        <label for="password">Password</label>
+        <input name="password" /><br />
+        <label for="name">Name</label>
+        <input name="name" /><br />
+        <input type="submit" value="Enter" />
+    </form>
+    <a href="Home/Member"></a>
+</body>

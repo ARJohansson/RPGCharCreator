@@ -1,0 +1,98 @@
+﻿@*
+    * Author: Ashley Johansson
+    * Date Created: 11/19/2019 05:25PM
+    * Date Updated: 12/05/2019 10:07PM
+    * The home page of each user showing a list
+    * of their creations.
+*@
+
+@{
+    Layout = "_Navigation";
+    ViewData["Title"] = "User Home";
+}
+@model String
+
+<body>
+    @{
+        RPGCharacterCreator.Models.User user = new RPGCharacterCreator.Models.User();
+        RPGCharacterCreator.Repos.IUserRepo userRepo = new RPGCharacterCreator.Repos.UserRepo();
+        user = userRepo.GetUserByUserName(@Model);
+
+    }
+    <h2> Welcome, @user.UserName, to your page.</h2>
+
+    @if (user.Characters.Count > 0)
+    {
+        <h3>List of Player Characters: </h3>
+        @foreach (RPGCharacterCreator.Models.Character character in user.Characters)
+        {
+            @if (character.IsPlayer == true)
+            {
+                <h4><em>Character Name: </em>@character.Name</h4>
+                <p><em>Species: </em>@character.Species</p>
+                <p><em>Gender: </em>@character.Gender</p>
+                <p><em>Description: </em>@character.Description</p>
+                <p><em>Abilities: </em></p>
+                <ul>
+                    @foreach (string item in character.Abilities)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            }
+        }
+        <h3>List of Non-Player Characters: </h3>
+        @foreach (RPGCharacterCreator.Models.Character character in user.Characters)
+        {
+            @if (character.IsNPC == true)
+            {
+                <h4>Character Name: @character.Name</h4>
+                <p><em>Species: </em>@character.Species</p>
+                <p><em>Gender: </em>@character.Gender</p>
+                <p><em>Description: </em>@character.Description</p>
+                <p><em>Abilities: </em></p>
+                <ul>
+                    @foreach (string item in character.Abilities)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            }
+        }
+        <h3>List of Monsters: </h3>
+        @foreach (RPGCharacterCreator.Models.Character character in user.Characters)
+        {
+            @if (character.IsMonster == true)
+            {
+                <h4>Character Name: @character.Name</h4>
+                <p><em>Species: </em>@character.Species</p>
+                <p><em>Gender: </em>@character.Gender</p>
+                <p><em>Description: </em>@character.Description</p>
+                <p><em>Abilities: </em></p>
+                <ul>
+                    @foreach (string item in character.Abilities)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            }
+        }
+
+    }
+    @if (user.Characters.Count <= 0)
+    {
+        <p> It looks like you don't have any creations to list.</p>
+    }
+    <p>
+        If you would like to make a new Non-Playing-Character:
+        <a asp-action="NpcCreator" asp-route-userName="@user.UserName">click here!</a>
+    </p>
+    <p>
+        If you would like to make a new Player Character:
+        <a asp-action="CharacterCreator" asp-route-userName="@user.UserName">click here!</a>
+    </p>
+    <p>
+        If you would like to make a new Monster:
+        <a asp-action="MonsterCreator" asp-route-userName="@user.UserName">click here!</a>
+    </p>
+</body>

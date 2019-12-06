@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - RPG</title>
+    <link href="~/css/rpg.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="navbar">
+        <a asp-controller="Home" asp-action="index">Home</a>
+        <div class="dropdown">
+            <button class="dropbutton">
+                User
+            </button>
+            <div class="dropdown-content">
+                <a asp-controller="Home" asp-action="SignUp">Log In/Sign Up</a>
+                <a asp-controller="Home" asp-action="Member">Your Home Page</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbutton">
+                Character
+            </button>
+            <div class="dropdown-content">
+                <a asp-controller="Home" asp-action="CharacterCreator">Create A New PC</a>
+                <a asp-controller="Home" asp-action="NpcCreator">Create A New NPC</a>
+                <a asp-controller="Home" asp-action="MonsterCreator">Create A New Monster</a>
+            </div>
+        </div>
+    </div>
+        @RenderBody()
+</body>
+</html>
