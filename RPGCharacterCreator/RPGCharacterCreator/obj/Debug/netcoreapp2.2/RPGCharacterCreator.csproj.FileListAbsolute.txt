@@ -56,6 +56,7 @@ C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGChar
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\obj\Debug\netcoreapp2.2\RPGCharacterCreator.csproj.CopyComplete
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\bin\Debug\netcoreapp2.2\appsettings.Development.json
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\bin\Debug\netcoreapp2.2\appsettings.Production.json
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\obj\Debug\netcoreapp2.2\Razor\Views\Home\CharacterCreator.cshtml.g.cs
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.cshtml.g.cs

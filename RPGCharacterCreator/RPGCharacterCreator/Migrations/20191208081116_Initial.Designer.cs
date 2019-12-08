@@ -10,7 +10,7 @@ using RPGCharacterCreator.Repos;
 namespace RPGCharacterCreator.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191208024731_Initial")]
+    [Migration("20191208081116_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

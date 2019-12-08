@@ -17,12 +17,14 @@ namespace RPGCharacterCreator
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IHostingEnvironment environment;
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            environment = env;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,8 +35,16 @@ namespace RPGCharacterCreator
             services.AddTransient<IUserRepo, UserRepo>();
             services.AddTransient<ICharacterRepo, CharacterRepo>();
 
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
-                Configuration["ConnectionStrings:RPGConnString"]));
+            if (environment.IsDevelopment())
+            {
+                services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
+                    Configuration["ConnectionStrings:RPGConnString"]));
+            }
+            else if (environment.IsProduction())
+            {
+                services.AddDbContext<AppDbContext>(options => options.UseMySql(
+                    Configuration["ConnectionStrings;RPGMySqlConnString"]));
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
