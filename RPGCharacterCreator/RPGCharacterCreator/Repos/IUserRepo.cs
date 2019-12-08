@@ -10,10 +10,10 @@ namespace RPGCharacterCreator.Repos
     {
         List<User> Users { get; }
         void AddUser(User user);
+        void AddCharacter(User user, Character c);
         bool CheckForUserByUserName(string userName);
         User GetUserByName(string name);
         User GetUserByUserName(string userName);
-        User GetUSerByEmail(string email);
-        void AddTestData();
+        User GetUserByEmail(string email);
     }
 }

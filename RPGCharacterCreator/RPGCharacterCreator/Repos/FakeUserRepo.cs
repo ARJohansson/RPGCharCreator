@@ -17,6 +17,11 @@ namespace RPGCharacterCreator.Repos
             users.Add(user);
         }
 
+        public void AddCharacter(User user, Character c)
+        {
+            user.Characters.Add(c);
+        }
+
         public bool CheckForUserByUserName(string userName)
         {
             if (users.Contains(GetUserByUserName(userName)))
@@ -27,7 +32,7 @@ namespace RPGCharacterCreator.Repos
                 return false;
         }
 
-        public User GetUSerByEmail(string email)
+        public User GetUserByEmail(string email)
         {
             User user = users.Find(u => u.Email == email);
             return user;

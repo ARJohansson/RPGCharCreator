@@ -7,8 +7,8 @@ namespace RPGCharacterCreator.Models
 {
     public class Character
     {
-        private List<string> abilities = new List<string>();
-        public string charID { get; set; }
+        private List<Ability> abilities = new List<Ability>();
+        public int CharacterID { get; set; }
 
         public Character() { }
         public Character(string name, string gender, string species, string description)
@@ -27,7 +27,7 @@ namespace RPGCharacterCreator.Models
         public string Species { get; set; }
         public string Description { get; set; }
 
-        public List<string> Abilities { get { return abilities; } }
+        public List<Ability> Abilities { get { return abilities; } }
 
     }
 }

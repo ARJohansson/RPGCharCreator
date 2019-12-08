@@ -10,7 +10,10 @@ namespace RPGCharacterCreator.Repos
     {
         List<Character> Characters { get; }
         void AddCharacter(Character c);
+        void AddAbility(Character c, Ability a);
+        bool CheckForCharacterByName(string name);
         Character GetCharacterByName(string name);
-        void AddTestData();
+        void UpdateCharacter(string name, string gender, string species,
+                                string description, string type, Ability a);
     }
 }

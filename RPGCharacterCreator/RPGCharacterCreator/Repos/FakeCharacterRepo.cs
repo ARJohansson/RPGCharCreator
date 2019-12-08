@@ -16,6 +16,10 @@ namespace RPGCharacterCreator.Repos
         {
             characters.Add(c);
         }
+        public void AddAbility(Character c, Ability a)
+        {
+            c.Abilities.Add(a);
+        }
 
         public Character GetCharacterByName(string name)
         {
@@ -23,9 +27,51 @@ namespace RPGCharacterCreator.Repos
             return character;
         }
 
+        public bool CheckForCharacterByName(string name)
+        {
+            for (int i = 0; i < Characters.Count(); i++)
+            {
+                if (Characters[i].Name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void UpdateCharacter(string name, string gender, string species,
+                        string description, string type, Ability a)
+        {
+            Character character = GetCharacterByName(name);
+            character.Gender = gender;
+            character.Species = species;
+            character.Description = description;
+            character.Abilities.Add(a);
+            if (type == "player")
+            {
+                character.IsPlayer = true;
+                character.IsNPC = false;
+                character.IsMonster = false;
+            }
+            else if (type == "npc")
+            {
+                character.IsPlayer = false;
+                character.IsNPC = true;
+                character.IsMonster = false;
+            }
+            else
+            {
+                character.IsPlayer = false;
+                character.IsNPC = false;
+                character.IsMonster = true;
+            }
+        }
+
         public void AddTestData()
         {
-            User user = new FakeUserRepo().GetUserByName("Phillip Grey");
+            FakeUserRepo fakeRepo = new FakeUserRepo();
+            fakeRepo.AddTestData();
+            User user = fakeRepo.GetUserByName("Phillip Grey");
             Character character = new Character() {
                 Name = "Alphie, Terror of the Night",
                 IsMonster = true,
@@ -35,9 +81,13 @@ namespace RPGCharacterCreator.Repos
                 Gender = "male",
                 Description = "Orange, short, fat, large fangs."
             };
-            character.Abilities.Add("Sharp claws and fangs that can kill and maim.");
-            character.Abilities.Add("Piercing red eyes for hypnotizing prey.");
-            character.Abilities.Add("A cruel laugh that paralyzes all who hear it.");
+            Ability ability = new Ability
+            {
+                Ability1 = "Sharp claws and fangs that can kill and maim.",
+                Ability2 = "Piercing red eyes for hypnotizing prey.",
+                Ability3 = "A cruel laugh that paralyzes all who hear it."
+            };
+            character.Abilities.Add(ability);
             characters.Add(character);
             user.Characters.Add(character);
 
@@ -54,9 +104,13 @@ namespace RPGCharacterCreator.Repos
                     "brown eyes, and if you don't try to mess with her, her smile will " +
                     "melt your heart."
             };
-            character.Abilities.Add("Handy with a sword.");
-            character.Abilities.Add("Makes a mean ale.");
-            character.Abilities.Add("A killer stare that makes grown men run to their mamas.");
+            ability = new Ability
+            {
+                Ability1 = "Handy with a sword.",
+                Ability2 = "Makes a mean ale.",
+                Ability3 = "A killer stare that makes grown men run to their mamas."
+            };
+            character.Abilities.Add(ability);
             characters.Add(character);
             user.Characters.Add(character);
         }

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGCharacterCreator", "RPGCharacterCreator\RPGCharacterCreator.csproj", "{22837B5C-1278-4098-8670-D2471F82628F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPGCharacterCreator", "RPGCharacterCreator\RPGCharacterCreator.csproj", "{22837B5C-1278-4098-8670-D2471F82628F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGCharacterCreator.Tests", "RPGCharacterCreator.Tests\RPGCharacterCreator.Tests.csproj", "{28D1129C-4EAA-4EC1-8588-A6C97C4BB3A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{22837B5C-1278-4098-8670-D2471F82628F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22837B5C-1278-4098-8670-D2471F82628F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22837B5C-1278-4098-8670-D2471F82628F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D1129C-4EAA-4EC1-8588-A6C97C4BB3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D1129C-4EAA-4EC1-8588-A6C97C4BB3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D1129C-4EAA-4EC1-8588-A6C97C4BB3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D1129C-4EAA-4EC1-8588-A6C97C4BB3A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

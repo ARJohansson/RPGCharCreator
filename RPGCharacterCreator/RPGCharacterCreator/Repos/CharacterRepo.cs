@@ -3,63 +3,83 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RPGCharacterCreator.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace RPGCharacterCreator.Repos
 {
     public class CharacterRepo : ICharacterRepo
     {
+        private AppDbContext context;
         private static List<Character> characters = new List<Character>();
 
-        public List<Character> Characters { get { return characters;  } }
+        public List<Character> Characters { get { return context.Characters.Include("Abilities").ToList();  } }
+
+        public CharacterRepo(AppDbContext appDbContext)
+        {
+            context = appDbContext;
+        }
 
         public void AddCharacter(Character c)
         {
-            characters.Add(c);
+            context.Characters.Add(c);
+            context.SaveChanges();
+        }
+
+        public void AddAbility(Character c, Ability a)
+        {
+            c.Abilities.Add(a);
+            context.Characters.Update(c);
+            context.SaveChanges();
         }
 
         public Character GetCharacterByName(string name)
         {
-            Character character = characters.Find(c => c.Name == name);
+            Character character;
+            character = context.Characters.First(c => c.Name == name);
             return character;
         }
 
-        public void AddTestData()
+        public bool CheckForCharacterByName(string name)
         {
-            User user = new FakeUserRepo().GetUserByName("Phillip Grey");
-            Character character = new Character()
+            for (int i = 0; i < context.Characters.Count(); i++)
             {
-                Name = "Alphie, Terror of the Night",
-                IsMonster = true,
-                IsNPC = false,
-                IsPlayer = false,
-                Species = "Pig Monster",
-                Gender = "male",
-                Description = "Orange, short, fat, large fangs."
-            };
-            character.Abilities.Add("Sharp claws and fangs that can kill and maim.");
-            character.Abilities.Add("Piercing red eyes for hypnotizing prey.");
-            character.Abilities.Add("A cruel laugh that paralyzes all who hear it.");
-            characters.Add(character);
-            user.Characters.Add(character);
+                if (Characters[i].Name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-            character = new Character()
+        public void UpdateCharacter(string name, string gender, string species, 
+                        string description, string type, Ability a)
+        {
+            Character character = GetCharacterByName(name);
+            character.Gender = gender;
+            character.Species = species;
+            character.Description = description;
+            character.Abilities.Add(a);
+            if (type == "player")
             {
-                Name = "Cleo SharpTongue",
-                IsMonster = false,
-                IsNPC = true,
-                IsPlayer = false,
-                Species = "Halfling",
-                Gender = "female",
-                Description = "Small, but tough bartender. Spends her days adventuring" +
-                    "and her nights busting heads at her tavern. She has brown hair and" +
-                    "brown eyes, and if you don't try to mess with her, her smile will " +
-                    "melt your heart."
-            };
-            character.Abilities.Add("Handy with a sword.");
-            character.Abilities.Add("Makes a mean ale.");
-            character.Abilities.Add("A killer stare that makes grown men run to their mamas.");
-            characters.Add(character);
-            user.Characters.Add(character);
+                character.IsPlayer = true;
+                character.IsNPC = false;
+                character.IsMonster = false;
+            }
+            else if (type == "npc")
+            {
+                character.IsPlayer = false;
+                character.IsNPC = true;
+                character.IsMonster = false;
+            }
+            else
+            {
+                character.IsPlayer = false;
+                character.IsNPC = false;
+                character.IsMonster = true;
+            }
+
+            context.Characters.Update(character);
+            context.SaveChanges();
         }
     }
 }

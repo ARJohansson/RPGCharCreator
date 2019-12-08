@@ -13,71 +13,13 @@ namespace RPGCharacterCreator.Controllers
     {
         IUserRepo uRepo;
         ICharacterRepo cRepo;
+        IAbilityRepo aRepo;
+        Ability ability;
 
         public HomeController(IUserRepo uR, ICharacterRepo cR)
         {
             uRepo = uR;
             cRepo = cR;
-            if(uRepo.Users.Count == 0)
-            {
-                User user = new User()
-                {
-                    Email = "Sandra.Heart@gmail.com",
-                    Name = "Sandra Heart",
-                    UserName = "SheartsJ",
-                    Password = "thisisaBADpassword"
-                };
-                uRepo.AddUser(user);
-
-                user = new User()
-                {
-                    Email = "P.Andrew.Grey@yahoo.com",
-                    Name = "Phillip Grey",
-                    UserName = "philgrey",
-                    Password = "lifeisPrettyGrey"
-                };
-                uRepo.AddUser(user);
-            }
-
-            if(cRepo.Characters.Count == 0)
-            {
-                User user = uRepo.GetUserByName("Phillip Grey");
-                Character character = new Character()
-                {
-                    Name = "Alphie, Terror of the Night",
-                    IsMonster = true,
-                    IsNPC = false,
-                    IsPlayer = false,
-                    Species = "Pig Monster",
-                    Gender = "male",
-                    Description = "Orange, short, fat, large fangs."
-                };
-                character.Abilities.Add("Sharp claws and fangs that can kill and maim.");
-                character.Abilities.Add("Piercing red eyes for hypnotizing prey.");
-                character.Abilities.Add("A cruel laugh that paralyzes all who hear it.");
-                cRepo.AddCharacter(character);
-                user.Characters.Add(character);
-                
-
-                character = new Character()
-                {
-                    Name = "Cleo SharpTongue",
-                    IsMonster = false,
-                    IsNPC = true,
-                    IsPlayer = false,
-                    Species = "Halfling",
-                    Gender = "female",
-                    Description = "Small, but tough bartender. Spends her days adventuring" +
-                        "and her nights busting heads at her tavern. She has brown hair and" +
-                        "brown eyes, and if you don't try to mess with her, her smile will " +
-                        "melt your heart."
-                };
-                character.Abilities.Add("Handy with a sword.");
-                character.Abilities.Add("Makes a mean ale.");
-                character.Abilities.Add("A killer stare that makes grown men run to their mamas.");
-                cRepo.AddCharacter(character);
-                user.Characters.Add(character);
-            }
         }
 
         // Returns the view from the Index page
@@ -121,13 +63,18 @@ namespace RPGCharacterCreator.Controllers
         [HttpGet]
         public IActionResult Member(string userName)
         {
-            return View("User", HttpUtility.HtmlDecode(userName));
+            List<User> users = uRepo.Users;
+            List<Character> characters = cRepo.Characters;
+            //List<Ability> abilities = aRepo.Abilities;
+
+            User user = uRepo.GetUserByUserName(userName);
+            return View("Member", user);
         }
 
         // Returns the view from the Character Creator page
-        public IActionResult CharacterCreator()
+        public IActionResult CharacterCreator(string userName)
         {
-            return View();
+            return View("CharacterCreator", HttpUtility.HtmlDecode(userName));
         }
 
         [HttpPost]
@@ -135,41 +82,42 @@ namespace RPGCharacterCreator.Controllers
                                                  string description, string ability1, string ability2,
                                                  string ability3, string ability4, string ability5)
         {
-            Character character = new Character(name, gender, species, description)
+            User user = uRepo.GetUserByUserName(userName);
+            Character character;
+            if (!cRepo.CheckForCharacterByName(name))
             {
-                IsPlayer = true,
-                IsMonster = false,
-                IsNPC = false
-            };
-            character.Abilities.Add(ability1);
-            character.Abilities.Add(ability2);
-            character.Abilities.Add(ability3);
-            character.Abilities.Add(ability4);
-            character.Abilities.Add(ability5);
-            cRepo.AddCharacter(character);
+                ability = new Ability()
+                {
+                    Ability1 = ability1,
+                    Ability2 = ability2,
+                    Ability3 = ability3,
+                    Ability4 = ability4,
+                    Ability5 = ability5
+                };
+                character = new Character(name, gender, species, description)
+                {
+                    IsPlayer = true,
+                    IsMonster = false,
+                    IsNPC = false
+                };
 
-
-            User user;
-            if (!uRepo.CheckForUserByUserName(userName))
+                cRepo.AddCharacter(character);
+                cRepo.AddAbility(character, ability);
+                uRepo.AddCharacter(user, character);
+            } else
             {
-                user = new User();
-                user.UserName = userName;
-                uRepo.AddUser(user);
+                character = cRepo.GetCharacterByName(name);
+                cRepo.UpdateCharacter(name, gender, species, description,
+                                        "player", ability);
             }
-            else
-            {
-                user = uRepo.GetUserByUserName(userName);
-            }
-
-            user.Characters.Add(character);
 
             return RedirectToAction("Member", new { userName = user.UserName });
         }
 
         // Returns the view from the Non-playing Character page
-        public IActionResult NpcCreator()
+        public IActionResult NpcCreator(string userName)
         {
-            return View();
+            return View("NpcCreator", HttpUtility.HtmlDecode(userName));
         }
 
         [HttpPost]
@@ -177,41 +125,43 @@ namespace RPGCharacterCreator.Controllers
                                                  string description, string ability1, string ability2,
                                                  string ability3, string ability4, string ability5)
         {
-            Character character = new Character(name, species, gender, description)
+            User user = uRepo.GetUserByUserName(userName);
+            Character character;
+            if (!cRepo.CheckForCharacterByName(name))
             {
-                IsPlayer = false,
-                IsMonster = false,
-                IsNPC = true
-            };
-            character.Abilities.Add(ability1);
-            character.Abilities.Add(ability2);
-            character.Abilities.Add(ability3);
-            character.Abilities.Add(ability4);
-            character.Abilities.Add(ability5);
-            cRepo.AddCharacter(character);
+                ability = new Ability()
+                {
+                    Ability1 = ability1,
+                    Ability2 = ability2,
+                    Ability3 = ability3,
+                    Ability4 = ability4,
+                    Ability5 = ability5
+                };
+                character = new Character(name, gender, species, description)
+                {
+                    IsPlayer = true,
+                    IsMonster = false,
+                    IsNPC = false
+                };
 
-
-            User user;
-            if (!uRepo.CheckForUserByUserName(userName))
-            {
-                user = new User();
-                user.UserName = userName;
-                uRepo.AddUser(user);
+                cRepo.AddCharacter(character);
+                cRepo.AddAbility(character, ability);
+                uRepo.AddCharacter(user, character);
             }
             else
             {
-                user = uRepo.GetUserByUserName(userName);
+                character = cRepo.GetCharacterByName(name);
+                cRepo.UpdateCharacter(name, gender, species, description,
+                                        "npc", ability);
             }
-
-            user.Characters.Add(character);
-
+            
             return RedirectToAction("Member", new { userName = user.UserName });
         }
 
         // Returns the view from the Monster Creator page
-        public IActionResult MonsterCreator()
+        public IActionResult MonsterCreator(string userName)
         {
-            return View();
+            return View("MonsterCreator", HttpUtility.HtmlDecode(userName));
         }
 
         [HttpPost]
@@ -219,33 +169,35 @@ namespace RPGCharacterCreator.Controllers
                                                  string description, string ability1, string ability2,
                                                  string ability3, string ability4, string ability5)
         {
-            Character character = new Character(name, gender, species, description)
+            User user = uRepo.GetUserByUserName(userName);
+            Character character;
+            if (!cRepo.CheckForCharacterByName(name))
             {
-                IsPlayer = false,
-                IsMonster = true,
-                IsNPC = false
-            };
-            character.Abilities.Add(ability1);
-            character.Abilities.Add(ability2);
-            character.Abilities.Add(ability3);
-            character.Abilities.Add(ability4);
-            character.Abilities.Add(ability5);
-            cRepo.AddCharacter(character);
+                ability = new Ability()
+                {
+                    Ability1 = ability1,
+                    Ability2 = ability2,
+                    Ability3 = ability3,
+                    Ability4 = ability4,
+                    Ability5 = ability5
+                };
+                character = new Character(name, gender, species, description)
+                {
+                    IsPlayer = true,
+                    IsMonster = false,
+                    IsNPC = false
+                };
 
-
-            User user;
-            if (!uRepo.CheckForUserByUserName(userName))
-            {
-                user = new User();
-                user.UserName = userName;
-                uRepo.AddUser(user);
+                cRepo.AddCharacter(character);
+                cRepo.AddAbility(character, ability);
+                uRepo.AddCharacter(user, character);
             }
             else
             {
-                user = uRepo.GetUserByUserName(userName);
+                character = cRepo.GetCharacterByName(name);
+                cRepo.UpdateCharacter(name, gender, species, description,
+                                        "monster", ability);
             }
-
-            user.Characters.Add(character);
 
             return RedirectToAction("Member", new { userName = user.UserName });
         }

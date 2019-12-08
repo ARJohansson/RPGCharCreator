@@ -3,64 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RPGCharacterCreator.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace RPGCharacterCreator.Repos
 {
     public class UserRepo : IUserRepo
     {
-        private static List<User> users = new List<User>();
+        private AppDbContext context;
+        public List<User> Users { get { return context.Users.Include("Characters").ToList(); } }
+        
+        public UserRepo(AppDbContext appDbContext)
+        {
+            context = appDbContext;
+        }
 
-        public List<User> Users => users;
+        public void AddUser(User user)
+        {
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
 
-        public void AddUser(User user) => users.Add(user);
+        public void AddCharacter(User user, Character c)
+        {
+            user.Characters.Add(c);
+            context.Users.Update(user);
+            context.SaveChanges();
+        }
 
         public bool CheckForUserByUserName(string userName)
         {
-            if (users.Contains(GetUserByUserName(userName)))
+            for (int i = 0; i < context.Users.Count(); i++)
             {
-                return true;
+                if (Users[i].UserName == userName)
+                {
+                    return true;
+                }
             }
-            else
-                return false;
+            return false;
         }
 
-        public User GetUSerByEmail(string email)
+        public User GetUserByEmail(string email)
         {
-            User user = users.Find(u => u.Email == email);
+            User user;
+            user = context.Users.First(u => u.Email == email);
             return user;
         }
 
         public User GetUserByName(string name)
         {
-            User user = users.Find(u => u.Name == name);
+            User user;
+            user = context.Users.First(u => u.Name == name);
             return user;
         }
 
         public User GetUserByUserName(string userName)
         {
-            User user = users.Find(u => u.UserName == userName);
+            User user;
+            user = context.Users.First(u => u.UserName == userName);
             return user;
-        }
-
-        public void AddTestData()
-        {
-            User user = new User()
-            {
-                Email = "Sandra.Heart@gmail.com",
-                Name = "Sandra Heart",
-                UserName = "SheartsJ",
-                Password = "thisisaBADpassword"
-            };
-            users.Add(user);
-
-            user = new User()
-            {
-                Email = "P.Andrew.Grey@yahoo.com",
-                Name = "Phillip Grey",
-                UserName = "philgrey",
-                Password = "lifeisPrettyGrey"
-            };
-            users.Add(user);
-        }
+        }        
     }
 }
