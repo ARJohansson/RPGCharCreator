@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Users";
+    Layout = "_Navigation";
+}
+
+@model List<User>
+
+<p>Here's what we found in the database: </p><br />
+@if (Model != null)
+{
+    <div>
+        @foreach (RPGCharacterCreator.Models.User u in Model)
+        {
+            @u.UserName <br />
+            @u.Name <br />
+            @u.Email <br />
+        }
+    </div>
+}
+<br />
+<p>If you're not seeing your friend here, try again: <a href="Index">Go Back</a></p>

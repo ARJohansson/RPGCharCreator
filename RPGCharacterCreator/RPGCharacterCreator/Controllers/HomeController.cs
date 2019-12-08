@@ -23,9 +23,28 @@ namespace RPGCharacterCreator.Controllers
         }
 
         // Returns the view from the Index page
+        [HttpGet]
         public ViewResult Index()
         {
             return View("Index");
+        }
+        // Returns a view containing a username/user value
+        [HttpPost]
+        public IActionResult Index(string searchText)
+        {
+            var possibleUsers = (from User u in uRepo.Users
+                         where u.UserName.Contains(searchText)
+                         select u).ToList();
+            return View("Users", possibleUsers);
+        }
+
+        [HttpGet]
+        public IActionResult Users(string possibleUsers)
+        {
+            IEnumerable<User> users = (from User u in uRepo.Users
+                                       where u.UserName == possibleUsers
+                                       select u).ToList();
+            return View(users);
         }
         
         // Returns the view from the Sign Up page
