@@ -36,3 +36,4 @@ C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGChar
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\obj\Release\netcoreapp2.2\win-x64\RPGCharacterCreator.pdb
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\obj\Release\netcoreapp2.2\win-x64\RPGCharacterCreator.csproj.CopyComplete
 C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\obj\Release\netcoreapp2.2\win-x64\Razor\Views\Home\Member.g.cshtml.cs
+C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\RPGCharCreator\RPGCharacterCreator\RPGCharacterCreator\obj\Release\netcoreapp2.2\win-x64\Razor\Views\Home\Users.g.cshtml.cs

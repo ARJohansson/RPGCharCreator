@@ -9,8 +9,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\Users\Ashley Johansson\Documents\Lanecc\CS295N\Project\rpgCharCreator\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
-    <DestinationConnectionStrings Include="RPGConnString">
-      <Value>Server=%28localdb%29\MSSQLLocalDB%3bDatabase=RPGCharacterCreator%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    <DestinationConnectionStrings Include="RPGMySqlConnString">
+      <Value>Server=MYSQL5015.site4now.net%3bDatabase=db_a4f6f8_rpgchcr%3bUid=a4f6f8_rpgchcr%3bPwd=thisisapass234</Value>
     </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="RPGCharacterCreator.Repos.AppDbContext">
+      <Value>Server=MYSQL5015.site4now.net%3bDatabase=db_a4f6f8_rpgchcr%3bUid=a4f6f8_rpgchcr%3bPwd=thisisapass234</Value>
+    </EFMigrations>
   </ItemGroup>
 </Project>
