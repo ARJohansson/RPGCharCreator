@@ -43,7 +43,7 @@ namespace RPGCharacterCreator
             else if (environment.IsProduction())
             {
                 services.AddDbContext<AppDbContext>(options => options.UseMySql(
-                    Configuration["ConnectionStrings;RPGMySqlConnString"]));
+                    Configuration["ConnectionStrings:RPGMySqlConnString"]));
             }
         }
 

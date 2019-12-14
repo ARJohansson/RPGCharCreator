@@ -1,0 +1,125 @@
+﻿/****** Main Html Body Styles ******/
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h3 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h5 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+/*Form Styles*/
+form {
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    text-align: match-parent;
+}
+
+textarea {
+    align-content: center;
+    columns: 500px;
+}
+
+/*Link Styles*/
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: blue;
+}
+
+a:visited {
+    color: purple;
+}
+
+/****** Navbar Styles ******/
+
+/*Container*/
+.navbar {
+    overflow: hidden;
+    background-color: azure;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/*Links*/
+.navbar a {
+    float: right;
+    font-size: 15px;
+    color: brown;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.navbar a:hover {
+    background-color: aquamarine;
+}
+
+/*Dropdown Styles*/
+.dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+    display:grid;
+}
+
+    /*Button Styles*/
+.dropdown .dropbutton {
+    font-size: 15px;
+    color: brown;
+    padding: 15px 15px;
+    background-color: inherit;
+    font-family: inherit;
+    text-align: center;
+    margin: 0;
+}
+
+.dropdown:hover .dropbutton {
+    background-color: aquamarine;
+    color: brown;
+}
+
+/*Dropdown Content*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: azure;
+}
+
+.dropdown-content a {
+    float: none;
+    font-size: 15px;
+    color: brown;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.dropdown-content a:hover {
+    padding: 15px 15px;
+    background-color: aquamarine;
+}

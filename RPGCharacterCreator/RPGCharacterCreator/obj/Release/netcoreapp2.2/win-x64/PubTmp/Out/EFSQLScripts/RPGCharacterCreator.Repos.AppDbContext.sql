@@ -9,7 +9,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191208081116_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191213195128_Initial')
 BEGIN
     CREATE TABLE [Users] (
         [UserID] int NOT NULL IDENTITY,
@@ -23,7 +23,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191208081116_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191213195128_Initial')
 BEGIN
     CREATE TABLE [Characters] (
         [CharacterID] int NOT NULL IDENTITY,
@@ -42,7 +42,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191208081116_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191213195128_Initial')
 BEGIN
     CREATE TABLE [Abilities] (
         [AbilityID] int NOT NULL IDENTITY,
@@ -59,24 +59,24 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191208081116_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191213195128_Initial')
 BEGIN
     CREATE INDEX [IX_Abilities_CharacterID] ON [Abilities] ([CharacterID]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191208081116_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191213195128_Initial')
 BEGIN
     CREATE INDEX [IX_Characters_UserID] ON [Characters] ([UserID]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191208081116_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20191213195128_Initial')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20191208081116_Initial', N'2.2.6-servicing-10079');
+    VALUES (N'20191213195128_Initial', N'2.2.6-servicing-10079');
 END;
 
 GO
